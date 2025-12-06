@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Portfolio & Manifesto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles and CSS variables */
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f0f0f0;
+            --accent-color: #393E46;
+            --text-color: #393E46;
+            --light-text: #666666;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 0px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and navigation styles */
+        header {
+            background-color: #000000;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .nav-links li a.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Main content area */
+        main {
+            padding: 40px 0 60px;
+            min-height: calc(100vh - 150px);
+            background-color: #ffffff;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Home page styles - NEW LAYOUT */
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .welcome-header p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .profile-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            font-size: 4.5rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        .profile-content h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .profile-content p {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .info-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #e0e0e0;
+            height: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: #d0d0d0;
+        }
+
+        .info-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        /* Small contact info card */
+        .contact-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-color: #d0d0d0;
+        }
+
+        .contact-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .contact-info i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .nav-to-manifesto {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-to-manifesto:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Design Manifesto page styles */
+        .manifesto-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .manifesto-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .manifesto-header p {
+            color: var(--light-text);
+        }
+
+        .manifesto-content {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto
+        }
+
+        .point {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .point:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .point h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .point p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .manifesto-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .manifesto-image img {
+            max-width: 50%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-top: 8px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* Design Sprints page styles */
+        .sprints-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sprints-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .sprints-header p {
+            color: var(--light-text);
+        }
+
+        .sprints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .sprint-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #e0e0e0;
+        }
+
+        .sprint-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #d0d0d0;
+        }
+
+        .sprint-img {
+            height: 180px;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 4rem;
+            border-bottom: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .sprint-content {
+            padding: 25px;
+        }
+
+        .sprint-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .sprint-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #000000;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: #cccccc;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .main-layout {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .left-column, .right-column {
+                width: 100%;
+            }
+            
+            .profile-card {
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start;
+                gap: 30px;
+            }
+            
+            .profile-img {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            
+            .profile-content {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+                border: 1px solid #333;
+                border-radius: var(--border-radius);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                gap: 25px;
+            }
+            
+            .profile-content p {
+                text-align: center;
+            }
+
+            .welcome-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .welcome-header p {
+                font-size: 1.1rem;
+            }
+
+            .manifesto-content, .info-card {
+                padding: 20px;
+            }
+            
+            /* 响应式图片调整 */
+            .manifesto-image {
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .welcome-header p {
+                font-size: 1rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                font-size: 4rem;
+            }
+            
+            .sprints-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-card, .info-card, .contact-card {
+                padding: 20px;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <span>Wendy Xu</span>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#" class="active" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="manifesto">Design Manifesto</a></li>
+                    <li><a href="#" data-page="sprints">Design Sprints</a></li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main>
+        <div class="container">
+            <!-- Home page -->
+            <section id="home" class="page active">
+                <div class="home-content">
+                    <div class="welcome-header">
+                        <h1>HCI Portfolio</h1>
+                    </div>
+                    
+                    <div class="main-layout">
+                        <!-- Left Column: Personal Introduction -->
+                        <div class="left-column">
+                            <div class="profile-card">
+                                <div class="profile-img">
+                                    <i class="fab fa-linux"></i>
+                                </div>
+                                <div class="profile-content">
+                                    <h2>About Me</h2>
+                                    <p>Hi! My name is Wendy Xu, a senior at Davidson College double-majoring in Chemistry and Computer Science. This is my personal 
+                                        portfolio for my Human-Computer Interaction (HCI) course.</p>
+                                    <p>This portfolio showcases the work from four design sprints accomplished collaboratively throughout the semester, along with my design manifesto. I hope you enjoy reading it!</p>
+                                    <a href="#" class="nav-to-manifesto" data-page="manifesto">Explore My Design Manifesto</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: Information Cards -->
+                        <div class="right-column">
+                            <div class="info-card">
+                                <h3><i class="fas fa-book-open"></i> About the Course</h3>
+                                <p>Human-Computer Interaction (HCI) integrated principles from computer science, psychology, sociology, design, and art to create technology centered on human experience. Throughout this course, we examined the inspiring potential and neglected issues of human-computer relationships, with a particular focus on designing for diverse users. Through historical analysis and hands-on group projects, I learned how to make a better design approach that applied human-centered thinking to resolve daily challenges.</p>
+                            </div>
+                            
+                            <div class="contact-card">
+                                <h3><i class="fas fa-envelope"></i> Contact</h3>
+                                <div class="contact-info">
+                                    <span>wexu@davidson.edu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Manifesto page -->
+            <section id="manifesto" class="page">
+                <div class="manifesto-header">
+                    <h2>My Design Manifesto</h2>
+                    <p>Five points I learned from four design sprints</p>
+                </div>
+                
+                <div class="manifesto-content">
+                    <div class="point">
+                        <h3>Introduction</h3>
+                        <p>This semester in my Human-Computer Interaction (HCI) class, I didn't just learn software or theories, but I learned how to actually build things with good design principles that <a href="https://ia.net/topics/learning-to-see" target="_blank">work for people</a>. Over four design sprints, I participated in hands-on collaborative projects on designing websites, visualizing data, building a VR game, and making a physical stand kiosk for a store. Each project focuses on different challenges, but they are also intrinsically connected by fundamental HCI principles. Good design does not come from simply epiphany, but through a practical process of asking the right questions, brainstorming extensively, testing iteratively, taking feedback, and fixing mistakes. Here in this design manifesto I will present five points that I will carry with me from this class, with evidence from the design sprints (DS) I worked on.</p>
+                        <div class="manifesto-image">
+                            <img src="img/stock.jpg" alt="Stock image: pexels.com">
+                            <p class="image-caption">Stock image: pexels.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>1. Know Exactly Who You're Building For</h3>
+                        <p>Every project taught me that we can't design for "everyone," a term that is too broad and vague. Instead, we need to pick a specific person and solve their specific problems. The practice of making <a href="https://xd.adobe.com/ideas/process/user-research/putting-personas-to-work-in-ux-design/" target="_blank">personas</a> helps with this, which elucidates the design process.</p>
+                        <p>In DS1 (website redesign for Knotty and Board), we designed for three specific people we made up: Jimmy, 60 years old, has poor eyesight and hearing; Martha, 55 years old, wants to filter by price and hates clicking through too many pages; Amy, 61 years old, is new to online shopping and gets overwhelmed.</p>
+                        <p>These vivid characters help us to better envision what we want our design to serve. Jimmy's poor eyesight meant we needed bigger text and text-to-speech functions on the smartwatch. Martha's budget concerns meant we needed an easy-to-use price filter. Amy's inexperience meant we needed to simplify the webpage and remove unnecessary or confusing parts. Every design decision came from asking: "What would Jimmy need here? Would this confuse Amy?"</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS1-1.png" alt="DS1: design that targets our personas - clarifying stores and bigger fonts">
+                            <p class="image-caption">DS1: design that targets our personas - clarifying stores and bigger fonts</p>
+                        </div>
+                        <p>This same idea was also emphasized in DS4 (store kiosk). Before we built anything, we recalled and shared our experiences shopping in stores. We collected our own needs for a store kiosk and referenced some existing kiosks we used, and we agreed on designing a kiosk that allows people to browse products, enjoy store services, and check out conveniently. We imagined how we want the kiosk to be if we are the customers, presenting ourselves as the specific customers who express their needs.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS4-1.jpg" alt="DS4: we referenced on the McDonald's Self Ordering Kiosk for our design (Wall Street Journal, Kevin Hagen)">
+                            <p class="image-caption">DS4: we referenced on the <a href="https://www.forbes.com/sites/edrensi/2018/07/11/mcdonalds-says-goodbye-cashiers-hello-kiosks/" target="_blank">McDonald's Self Ordering Kiosk</a> for our design (Wall Street Journal, Kevin Hagen)</p>
+                        </div>
+                        <p>In short, it is important to pick a real person with real problems and to come up with solutions for these problems. It is never a good idea to just design for the abstract "users."</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>2. Having Limits Actually Helps</h3>
+                        <p>At first, I saw limitations, such as small screens or technical constraints, as disadvantages. But I eventually learned that they actually make us more creative when developing new design ideas.</p>
+                        <p>In DS1 (website redesign for Knotty and Board), the smartwatch screen was small and restrictive. We couldn't include everything from the website, so we had to prioritize: what is the most important action someone would take on a watch? We concluded that it was allowing users to quickly view product visuals and access key functions with high <a href="https://web.mit.edu/6.813/www/sp18/classes/18-accessibility/" target="_blank">accessibility</a>. Therefore, we focused on simplifying the content, highlighting product images, and integrating high-accessibility features such as text-to-speech and an AI assistant. The small screen ultimately pushed us to concentrate on what mattered most.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS1-2.png" alt="DS1: think about the limitation on smartwatch and turn it to be creativity">
+                            <p class="image-caption">DS1: think about the limitation on smartwatch and turn it to be creativity</p>
+                        </div>
+                        <p>In DS2 (coffee data <a href="https://queue.acm.org/detail.cfm?id=1805128" target="_blank">visualization</a>), we initially chose to display coffee and country information on a map because it looked visually appealing and straightforward. However, the data from the archive was incomplete: many countries would appear empty and grey if we used a map. Therefore, we chose to use parallel coordinates instead, which allowed us to present the data more clearly without wasting space or providing redundant information. This limitation ultimately helped improve the clarity and effectiveness of the data communication.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS2-1.png" alt="DS2: our initial paper prototyping for the map visualization">
+                            <p class="image-caption">DS2: our initial paper prototyping for the map visualization</p>
+                        </div>
+                        <p>In DS3 (the VR alien dog game), we didn't know how to correctly transform or position a 3D model in A-Frame. Instead of using a 3D alien dog, we used a 2D image that could bark. The barking sound actually worked well: players could locate the dog by listening, which made the search easier than relying solely on visual cues in a large, star-filled space. Our technical limitation opened up an alternative approach that ultimately created a better gameplay experience.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS3-1.png" alt="DS3: the 2D alien dog">
+                            <p class="image-caption">DS3: the 2D alien dog</p>
+                        </div>
+                        <p>In short, limitations force you to rethink what is truly necessary. When you can't do everything, you should always do the important things better.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>3. Build Simple and Ugly Versions First</h3>
+                        <p>I used to try to make everything nearly complete from the very beginning, but I eventually realized that this strategy is highly ineffective. In fact, the faster you create a rough version, the faster you can identify what needs improvement.</p>
+                        <p>In all our design sprints, we always began with paper <a href="https://faculty.washington.edu/ajko/books/design-methods/how-to-prototype.html" target="_blank">prototyping</a>. We sketched multiple versions, combined the best parts, and discarded the weaker ideas. This step clarified our design direction and saved us time by preventing us from diving into design tools without a clear plan.</p>
+                        <p>In DS3 (the VR alien dog game), we built the game by gradually evolving from early rough versions. In version 1, our only goal was to place the planets in the scene, without any game mechanics. In version 2, we made the planets rotate and move, and added the 2D dog. In version 3, we added the barking sound and the background music while fixing remaining bugs. Each version took only a few days to develop, and the final result turned out very well. If we had attempted to build the complete game all at once, we would likely have run into many technical problems and failed to identify the features that truly worked.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS3-2.png" alt="DS3: start from building the basics of a solar system">
+                            <p class="image-caption">DS3: start from building the basics of a solar system</p>
+                        </div>
+                        <p>In short, it's best to build the simplest functional version first: test it, learn from it, and then improve it in the next iteration. Never try to perfect everything or overload the project with content at the initial stage.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>4. Listen to Feedback</h3>
+                        <p>People will tell you what is wrong with your design, and sometimes they even know how to fix it. Our job is to understand the issues they raise and incorporate helpful feedback into our work.</p>
+                        <p>In DS1 (the website redesign for Knotty and Board), when we demonstrated our large-screen display design, people commented that the shopping cart was confusing: the cart preview and the actual cart icon were placed in different locations. They suggested connecting the two to clarify the cart function. Although this seems like an obvious issue, we didn't notice it during prototyping.</p>
+                        <p>In DS2 (coffee data visualization), when we presented our chart demo, a classmate pointed out that the R-square value lacked explanation. Not everyone is familiar with this statistical term, so if we choose to display it, we should not assume universal understanding; instead, we should focus on extreme users and provide clear instructions. Based on this advice, we later added an explanatory box defining all statistical terms in our charts.</p>
+                        <p>In DS4, our initial kiosk design included a "login with one-time code" page. Every classmate who tested it was confused – they didn't know what the code referred to. We quickly realized that this page was unnecessary. Moreover, during the demo day, one classmate suggested using printed furniture codes on small paper slips that customers could take and scan at the kiosk. We found this idea fascinating and immediately incorporated it into our final design.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS4-2.png" alt="DS4: the printed barcode from the classmates' feedback">
+                            <p class="image-caption">DS4: the printed barcode from the classmates' feedback</p>
+                        </div>
+                        <p>In short, feedback often reveals issues that designers and developers themselves may overlook.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>5. Design for the Real World</h3>
+                        <p>A design does not exist only on a computer – it exists in a physical space and is used by real people in real situations.</p>
+                        <p>This became increasingly clear through the progression of my projects: DS1 and DS2 focused mainly on screen-based displays (watch, laptop, large display, and webpage); DS3 involved VR; DS4 centered around a physical kiosk in a store.</p>
+                        <p>For the store kiosk in DS4, we concentrated more on the physical design than on the Figma screen layouts. We had to consider questions such as: How tall should the kiosk be for standing users? Where should the scanner be placed? How do people recognize that this kiosk is meant for shopping, and how do they know they can interact with it by touching the screen? We built the kiosk out of cardboard and placed an iPad inside to display the screens. This gave us insights more than what we could learn from digital design alone. We could stand in front of the kiosk and experience how a user would actually interact with it.</p>
+                        <p>In DS3, the VR game, we also had to think about physical interactions. The initial A-Frame project ran on a computer, and the player moved using the keyboard. But because the final version was intended for mobile VR, we created a phone version where the user was always moving and would move in the direction they looked toward. We also added additional text instructions to guide the user through the experience.</p>
+                        <div class="manifesto-image">
+                            <img src="img/DS3-3.png" alt="DS3: the original computer-based VR that requires WASD to move">
+                            <p class="image-caption">DS3: the original computer-based VR that requires WASD to move</p>
+                        </div>
+                        <p>In short, design is not just about the content – it is about how people physically interact with it in the real world.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3>Conclusion</h3>
+                        <p>I learned all these valuable points by making things, watching people interact with our designs, and fixing problems along the way. Design isn't about creating something pretty – it's about creating something that truly works. Through a semester of hands-on projects, I developed a stronger design mindset, and I now feel much more prepared for future design challenges.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Sprints page -->
+            <section id="sprints" class="page">
+                <div class="sprints-header">
+                    <h2>Design Sprints</h2>
+                    <p>Four collaborative projects from this semester</p>
+                </div>
+                
+                <div class="sprints-grid">
+                    <div class="sprint-card">
+                        <div class="sprint-img">
+                            <img src="img/DS1.png" alt="Design Sprint 1 - Knotty and Board Website Redesign" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+                        <div class="sprint-content">
+                            <h3>Design Sprint #1</h3>
+                            <p>Redesigned the Knotty and Board website for three devices: smartwatch, laptop, and large screen display, focusing on accessibility for older users.</p>
+                            <a href="https://medium.com/@jowhitehouse_64694/design-sprint-1-design-for-dimensions-8b53474d3cd1" class="btn" target="_blank">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <div class="sprint-card">
+                        <div class="sprint-img">
+                            <img src="img/DS2.png" alt="Design Sprint 2 - Coffee Data Visualization" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+                        <div class="sprint-content">
+                            <h3>Design Sprint #2</h3>
+                            <p>Created data visualizations for coffee quality data, including parallel coordinates, scatter plots, bubble charts, radar graphs, stacked bar charts, and heatmap to analyze relationships.</p>
+                            <a href="https://medium.com/@wexu_40391/visualizing-coffee-across-the-world-362bbecf798f" class="btn" target="_blank">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <div class="sprint-card">
+                        <div class="sprint-img">
+                            <img src="img/DS3.png" alt="Design Sprint 3 - VR Space Exploration Game" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+                        <div class="sprint-content">
+                            <h3>Design Sprint #3</h3>
+                            <p>Built a VR space exploration game where players search for an alien dog in a solar system, using A-Frame for web-based VR.</p>
+                            <a href="https://medium.com/@thompsontyler607/e429b2d23d38" class="btn" target="_blank">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <div class="sprint-card">
+                        <div class="sprint-img">
+                            <img src="img/DS4.png" alt="Design Sprint 4 - Store Kiosk Design" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
+                        <div class="sprint-content">
+                            <h3>Design Sprint #4</h3>
+                            <p>Designed and prototyped a physical kiosk for in-store use at Knotty and Board, combining digital interface with physical components.</p>
+                            <a href="https://medium.com/@jowhitehouse_64694/design-sprint-4-re-design-and-extend-09cffa3646fe?postPublishedType=initial " class="btn" target="_blank">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">© 2025 Design Portfolio & Manifesto. Created for HCI Final Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-links a, .nav-to-manifesto');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navMenu = document.querySelector('.nav-links');
+            
+            // Function to switch between pages
+            function switchPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show target page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update navigation link states
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // On mobile: close menu after selection
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                }
+                
+                // Scroll to top when switching pages
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Add click events to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    switchPage(pageId);
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Initialize with home page active
+            switchPage('home');
+            
+            // Responsive: adjust menu on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
